@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">KrasnoYa</string>
+    <string name="todo">TODO</string>
+    <string name="city">Город:</string>
+    <string name="city_name">-------</string>
+    <string name="time">Время:</string>
+    <string name="date">---------</string>
+    <string name="tempreture">Температура</string>
+    <string name="_14">---</string>
+    <string name="load">Загрузить</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="my_header_title">My header title</string>
+    <item name="tvCityVariable" type="id">tvCity</item>
+    <item name="tvTime" type="id">tvTime</item>
+    <item name="tvTimeVariable" type="id">tvTimeVariable</item>
+    <item name="tvTemp" type="id">tvTemp</item>
+    <item name="tvTempVariable" type="id">tvTempVariable</item>
+    <item name="tvLoad" type="id">tvLoad</item>
+</resources>
