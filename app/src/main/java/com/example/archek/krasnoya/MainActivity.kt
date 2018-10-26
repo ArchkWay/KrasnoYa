@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
                 if (call.isCanceled) {
                     Toast.makeText(applicationContext, getString(R.string.Error), Toast.LENGTH_SHORT).show()
+                    tvNoData!!.text = getString(R.string.Error);
                 }
             }
         })
