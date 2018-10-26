@@ -21,6 +21,8 @@ import retrofit2.Response
 import com.example.archek.krasnoya.net.KrasService
 import com.example.archek.krasnoya.net.ObjectResponse
 import com.example.archek.krasnoya.net.RestApi
+import java.text.DateFormat
+import java.text.DateFormatSymbols
 
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private var mDrawerLayout: DrawerLayout? = null//создаём переменные
     private var toolbar: Toolbar? = null
     private var ivNoData: ImageView? = null
+    private var tvNoData: TextView? = null
     private var clData: ConstraintLayout? = null
     private val service = RestApi.createService(KrasService::class.java)
     private var call: Call<ObjectResponse>? = null
@@ -48,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         tvTimeVariable = findViewById(R.id.tvTimeVariable)
         tvTempVariable = findViewById(R.id.tvTempVariable)
         ivNoData = findViewById(R.id.ivNoData)
+        tvNoData = findViewById(R.id.tvNoData)
         toolbar = findViewById(R.id.toolbar)
 
         setSupportActionBar(toolbar)//инициализируем элементы - активируем тулбар
@@ -73,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     fun loadData() {//метод загрузки данных
         ivNoData!!.visibility = View.GONE
+        tvNoData!!.visibility = View.GONE
         clData!!.visibility = View.VISIBLE
 
         call = service.data
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ObjectResponse>, t: Throwable) {
                 if (call.isCanceled) {
-                    Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, getString(R.string.Error), Toast.LENGTH_SHORT).show()
                 }
             }
         })
@@ -122,54 +127,17 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun adaptedDate(inputDate: Long?) {//адаптируем дату под заданные формат
+    @SuppressLint("SimpleDateFormat")
+    fun adaptedDate(inputDate: Long?) {//адаптируем дату под заданный формат
         @SuppressLint("SimpleDateFormat")
-        val dateFormat = SimpleDateFormat("HH:mm, dd MM yyyy", Locale.getDefault())
+        val russian = Locale("ru", "RU")
+        val ruMonths = arrayOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
+        val russSymbol = DateFormatSymbols(russian)
+        Locale.setDefault(russian);
+        russSymbol.setMonths(ruMonths);
+        val dateFormat = SimpleDateFormat("HH:mm, dd MMMM yyyy", russSymbol)
         val date = Date(inputDate!!)
-        val now = dateFormat.format(date)
-        current = ruMonths(now)
+        current = dateFormat.format(date)
     }
-
-    fun ruMonths(now: String): String {//заморочки с русскими месяцами
-        var now = now
-        val monthNum = now.substring(10, 12)
-        if (monthNum == "12") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " декабря ") + now.substring(13)
-        }
-        if (monthNum == "11") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " ноября ") + now.substring(13)
-        }
-        if (monthNum == "10") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " октября ") + now.substring(13)
-        }
-        if (monthNum == "09") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " сентября ") + now.substring(13)
-        }
-        if (monthNum == "08") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " августа ") + now.substring(13)
-        }
-        if (monthNum == "07") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " июля ") + now.substring(13)
-        }
-        if (monthNum == "06") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " июня ") + now.substring(13)
-        }
-        if (monthNum == "05") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " мая ") + now.substring(13)
-        }
-        if (monthNum == "04") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " апреля ") + now.substring(13)
-        }
-        if (monthNum == "03") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " марта ") + now.substring(13)
-        }
-        if (monthNum == "02") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " февраля ") + now.substring(13)
-        }
-        if (monthNum == "01") {
-            now = now.substring(0, 9) + now.substring(10, 12).replace(now.substring(10, 12), " января ") + now.substring(13)
-        }
-        return now
-    }//заморочки с русскими месяцами(лучше не раскрывайте:)
 }
 

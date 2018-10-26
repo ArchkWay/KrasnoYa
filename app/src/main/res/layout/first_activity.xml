@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,8 +13,8 @@
         android:layout_height="271dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="8dp">
 
         <ImageView
             android:id="@+id/ivLogo"
@@ -26,29 +25,27 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <android.support.v7.widget.CardView
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/cl2"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@color/colorWhite"
-        app:cardCornerRadius="20dp"
+        android:background="@drawable/first_rounded"
         app:layout_constraintTop_toBottomOf="@+id/cl1"
-        tools:layout_editor_absoluteX="24dp"
         tools:ignore="MissingConstraints"
-        >
+        tools:layout_editor_absoluteX="24dp">
 
-        <ImageView
-            android:id="@+id/ivForward"
+        <Button
+            android:id="@+id/btnForward"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
-            android:src="@drawable/forward"
-            android:text="Вперёд"
-            android:textAlignment="center" />
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundedbutton"
+            android:text="@string/forward"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>
