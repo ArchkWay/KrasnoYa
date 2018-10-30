@@ -132,10 +132,8 @@ class MainActivity : AppCompatActivity() {
     fun adaptedDate(inputDate: Long?) {//адаптируем дату под заданный формат
         @SuppressLint("SimpleDateFormat")
         val russian = Locale("ru", "RU")
-        val ruMonths = arrayOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря")
         val russSymbol = DateFormatSymbols(russian)
         Locale.setDefault(russian);
-        russSymbol.setMonths(ruMonths);
         val dateFormat = SimpleDateFormat("HH:mm, dd MMMM yyyy", russSymbol)
         val date = Date(inputDate!!)
         current = dateFormat.format(date)
